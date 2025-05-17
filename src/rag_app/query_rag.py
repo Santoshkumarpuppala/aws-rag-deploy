@@ -15,7 +15,7 @@ Answer the question based on the above context: {question}
 """
 
 #BEDROCK_MODEL_ID = "amazon.titan-text-premier-v1:0"
-#BEDROCK_MODEL_ID = "meta.llama3-70b-instruct-v1:0"
+BEDROCK_MODEL_ID = "meta.llama3-70b-instruct-v1:0"
 
 @dataclass
 class QueryResponse:
