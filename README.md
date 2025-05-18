@@ -1,46 +1,52 @@
-# RAG Application
+# 🤖 RAG Application
 
 A Retrieval-Augmented Generation (RAG) application built with LangChain and AWS Bedrock.
 
-## Overview
+![RAG Architecture](https://admin.bentoml.com/uploads/simple_rag_workflow_091648ef39.png)
+
+## 📋 Overview
 
 This application implements a RAG system that:
-- Processes PDF documents as knowledge sources
-- Creates vector embeddings using AWS Bedrock
-- Stores embeddings in a ChromaDB vector database
-- Retrieves relevant context based on user queries
-- Generates responses using LLMs (currently Meta Llama 3 70B) via AWS Bedrock
+- 📄 Processes PDF documents as knowledge sources
+- 🔢 Creates vector embeddings using AWS Bedrock
+- 💾 Stores embeddings in a ChromaDB vector database
+- 🔍 Retrieves relevant context based on user queries
+- ✨ Generates responses using LLMs (currently Meta Llama 3 70B) via AWS Bedrock
 
-## Prerequisites
+## 🔧 Prerequisites
 
 - Python 3.11+
 - AWS account with Bedrock access
 - AWS credentials configured locally
 
-## Installation
+## 🚀 Installation
 
 1. Clone the repository
 2. Install dependencies:
 ```bash
 pip install -e .
 ```
+3. Install requirements:
+```bash
+pip install -r requirements.txt
+```
 
-## Usage
+## 📚 Usage
 
-### Adding Documents
+### 📥 Adding Documents
 
 1. Place PDF documents in the `src/data/source` directory
 2. Create or update the vector database:
-```bash
-python create_db.py
-```
+   ```bash
+   python create_db.py
+   ```
 
 To reset the database:
-```bash
-python create_db.py --reset
-```
+   ```bash
+   python create_db.py --reset
+   ```
 
-### Querying the RAG System
+### 🔎 Querying the RAG System
 
 ```python
 from src.rag_app.query_rag import query_rag
@@ -49,7 +55,7 @@ response = query_rag("How can I contact support?")
 print(response.response_text)
 ```
 
-## Project Structure
+## 🏗️ Project Structure
 
 - `src/rag_app/` - Core application code
   - `get_embeddings.py` - AWS Bedrock embedding functions
@@ -60,9 +66,46 @@ print(response.response_text)
   - `chroma/` - ChromaDB vector database
 
 ## Configuration
+- The application uses amazon.titan-embed-text-v1 by default. To change the model, modify the `modelId` in `src/rag_app/get_embeddings.py`.
+- The application uses Meta Llama 3 70B by default. To change the model, modify the `BEDROCK_MODEL_ID` in `src/rag_app/query_rag.py`.
 
-The application uses Meta Llama 3 70B by default. To change the model, modify the `BEDROCK_MODEL_ID` in `src/rag_app/query_rag.py`.
+### Docker Image
 
-## License
+A Dockerfile is provided for easy deployment. Build the image:
+```bash
+docker build --platform linux/amd64 -t aws_rag_app .
+```
 
-[Your license information]
+Run the container and verify the aws credentials are working:
+```bash
+docker run --platform linux/amd64 --rm -it -p 8000:8000     --env-file .env     --entrypoint python    aws_rag_app test_aws_credentials.py
+```
+OR
+
+Run the container with local aws credentials and verify the aws credentials are working:
+```bash
+docker run --platform linux/amd64 --rm -it    -p 8000:8000    -v ~/.aws:/root/.aws    --entrypoint python    aws_rag_app src/app_api_handler.py
+```
+
+### Running Locally the Docker Container
+```bash
+docker run --platform linux/amd64 --rm -it   -p 8000:8000     --env-file .env    --entrypoint python     aws_rag_app src/app_api_handler.py
+```
+
+- Access the API at http://localhost:8000/docs.
+
+## 👥 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## ❤️ Made with Love
+
+Built with passion for efficient knowledge retrieval and natural language processing.
+
+If you find this project useful, please consider giving it a star ⭐
