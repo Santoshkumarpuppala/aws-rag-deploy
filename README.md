@@ -22,11 +22,22 @@ This application implements a RAG system that:
 ## 🚀 Installation
 
 1. Clone the repository
-2. Install dependencies:
+2. Create a virtual environment:
+   ```bash
+   # Using conda
+   conda create -n rag-app python==3.11 -y
+   conda activate rag-app
+   
+   # OR using uv
+   uv venv
+   source .venv/bin/activate  # On Unix/macOS
+   # .venv\Scripts\activate    # On Windows
+   ```
+3. Install local package & its dependencies:
 ```bash
 pip install -e .
 ```
-3. Install requirements:
+4. Install requirements:
 ```bash
 pip install -r requirements.txt
 ```
