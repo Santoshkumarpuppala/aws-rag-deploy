@@ -107,33 +107,7 @@ docker run --platform linux/amd64 --rm -it   -p 8000:8000     --env-file .env   
 
 ## 🔄 Workflow
 
-```mermaid
-graph TD
-    A[PDF Documents] -->|Upload to source directory| B[Document Processing]
-    B -->|Text Extraction & Chunking| C[Vector Embeddings]
-    C -->|AWS Bedrock Titan Embed| D[ChromaDB Storage]
-    
-    E[User Query] -->|Input| F[Query Processing]
-    F -->|Similarity Search| D
-    D -->|Retrieve Relevant Chunks| G[Context Assembly]
-    G -->|Format with Prompt| H[LLM Generation]
-    H -->|AWS Bedrock Llama 3 70B| I[Response]
-    
-    subgraph "Data Ingestion"
-    A
-    B
-    C
-    D
-    end
-    
-    subgraph "Query Pipeline"
-    E
-    F
-    G
-    H
-    I
-    end
-```
+![Workflow](https://github.com/aws-samples/aws-bedrock-retrieval-augmented-generation/blob/main/src/assets/workflow.png?raw=true)
 
 The workflow above illustrates the two main processes in the RAG application:
 
