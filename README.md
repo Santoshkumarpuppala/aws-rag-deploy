@@ -107,7 +107,7 @@ docker run --platform linux/amd64 --rm -it   -p 8000:8000     --env-file .env   
 
 ## 🔄 Workflow
 
-![Workflow](https://github.com/aws-samples/aws-bedrock-retrieval-augmented-generation/blob/main/src/assets/workflow.png?raw=true)
+![Workflow](https://github.com/sourangshupal/aws-rag-deploy/blob/main/assets/workflow.png)
 
 The workflow above illustrates the two main processes in the RAG application:
 
